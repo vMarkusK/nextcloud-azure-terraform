@@ -22,6 +22,12 @@ variable "rg_prefix" {
   default     = "rg"
 }
 
+variable "vnet_prefix" {
+  description = "The Azure VNet name prefix"
+  type        = string
+  default     = "vnet"
+}
+
 variable "uai_prefix" {
   description = "The Azure User Managed Identity name prefix"
   type        = string
@@ -38,4 +44,22 @@ variable "key_prefix" {
   description = "The Azure Key Vault Key name prefix"
   type        = string
   default     = "key"
+}
+
+variable "st_prefix" {
+  description = "The Azure Storage Accountname prefix"
+  type        = string
+  default     = "st"
+}
+
+variable "pe_prefix" {
+  description = "The Azure Private Endpoint prefix"
+  type        = string
+  default     = "pe"
+}
+
+variable "vnet_addressspace" {
+  description = "The VNet Address Space"
+  type        = list(string)
+  default     = ["172.20.1.0/24"]
 }

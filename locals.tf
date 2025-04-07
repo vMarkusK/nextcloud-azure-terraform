@@ -1,8 +1,10 @@
 # Naming
 locals {
-  rg_name  = format("%s-%s-%s", var.rg_prefix, var.app_name, random_string.suffix.result)
-  uai_name = format("%s-%s-%s", var.uai_prefix, var.app_name, random_string.suffix.result)
-  kv_name  = format("%s-%s-%s", var.kv_prefix, var.app_name, random_string.suffix.result)
-  key_name = format("%s-%s-%s", var.key_prefix, var.app_name, random_string.suffix.result)
-
+  rg_name    = format("%s-%s-%s", var.rg_prefix, var.app_name, random_string.suffix.result)
+  vnet_name  = format("%s-%s-%s", var.vnet_prefix, var.app_name, random_string.suffix.result)
+  uai_name   = format("%s-%s-%s", var.uai_prefix, var.app_name, random_string.suffix.result)
+  kv_name    = format("%s-%s-%s", var.kv_prefix, var.app_name, random_string.suffix.result)
+  key_name   = format("%s-%s-%s", var.key_prefix, var.app_name, random_string.suffix.result)
+  st_name    = format("%s%s%s", var.st_prefix, var.app_name, random_string.suffix.result)
+  st_pe_name = format("%s-%s", var.pe_prefix, local.st_name)
 }
