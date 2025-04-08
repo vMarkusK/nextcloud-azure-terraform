@@ -8,9 +8,10 @@ resource "azurerm_storage_account" "nextcloud" {
   access_tier              = "Hot"
   account_replication_type = "ZRS"
 
+  public_network_access_enabled    = false
   https_traffic_only_enabled       = true
   min_tls_version                  = "TLS1_2"
-  shared_access_key_enabled        = false
+  shared_access_key_enabled        = true
   allow_nested_items_to_be_public  = false
   cross_tenant_replication_enabled = false
   sftp_enabled                     = false
@@ -30,12 +31,6 @@ resource "azurerm_storage_account" "nextcloud" {
     key_vault_key_id          = azurerm_key_vault_key.nextcloud.versionless_id
     user_assigned_identity_id = azurerm_user_assigned_identity.nextcloud.id
   }
-
-  network_rules {
-    default_action = "Deny"
-    bypass         = ["AzureServices"]
-  }
-
 
   blob_properties {
     container_delete_retention_policy {
