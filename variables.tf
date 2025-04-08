@@ -70,6 +70,12 @@ variable "app_prefix" {
   default     = "app"
 }
 
+variable "redis_prefix" {
+  description = "The AzureRedis Cache prefix"
+  type        = string
+  default     = "redis"
+}
+
 
 variable "vnet_addressspace" {
   description = "The VNet Address Space"

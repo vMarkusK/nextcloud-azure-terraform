@@ -48,5 +48,8 @@ resource "azurerm_linux_web_app" "nextcloud" {
 
   app_settings = {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = true
+    REDIS_HOST                          = azurerm_redis_cache.nextcloud.hostname
+    REDIS_HOST_PASSWORD                 = azurerm_redis_cache.nextcloud.primary_access_key
+    REDIS_HOST_PORT                     = azurerm_redis_cache.nextcloud.port
   }
 }
