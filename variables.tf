@@ -64,6 +64,12 @@ variable "asp_prefix" {
   default     = "asp"
 }
 
+variable "app_prefix" {
+  description = "The Azure Web App prefix"
+  type        = string
+  default     = "app"
+}
+
 
 variable "vnet_addressspace" {
   description = "The VNet Address Space"
