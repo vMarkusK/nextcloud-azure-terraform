@@ -6,8 +6,9 @@ resource "azurerm_virtual_network" "nextcloud" {
 }
 
 resource "azurerm_subnet" "nextcloud_pe" {
-  name                 = "nextcloud_pe"
-  resource_group_name  = azurerm_resource_group.nextcloud.name
-  virtual_network_name = azurerm_virtual_network.nextcloud.name
-  address_prefixes     = [cidrsubnet(var.vnet_addressspace[0], 4, 1)]
+  name                            = "nextcloud_pe"
+  resource_group_name             = azurerm_resource_group.nextcloud.name
+  virtual_network_name            = azurerm_virtual_network.nextcloud.name
+  address_prefixes                = [cidrsubnet(var.vnet_addressspace[0], 4, 1)]
+  default_outbound_access_enabled = false
 }
