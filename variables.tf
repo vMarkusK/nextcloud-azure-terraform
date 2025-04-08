@@ -58,6 +58,13 @@ variable "pe_prefix" {
   default     = "pe"
 }
 
+variable "asp_prefix" {
+  description = "The Azure App Service Plan prefix"
+  type        = string
+  default     = "asp"
+}
+
+
 variable "vnet_addressspace" {
   description = "The VNet Address Space"
   type        = list(string)

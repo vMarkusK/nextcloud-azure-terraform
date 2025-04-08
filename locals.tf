@@ -7,4 +7,5 @@ locals {
   key_name   = format("%s-%s-%s", var.key_prefix, var.app_name, random_string.suffix.result)
   st_name    = format("%s%s%s", var.st_prefix, var.app_name, random_string.suffix.result)
   st_pe_name = format("%s-%s", var.pe_prefix, local.st_name)
+  asp_name   = format("%s-%s", var.asp_prefix, local.st_name)
 }
