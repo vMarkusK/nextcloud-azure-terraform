@@ -76,9 +76,14 @@ variable "redis_prefix" {
   default     = "redis"
 }
 
-
 variable "vnet_addressspace" {
   description = "The VNet Address Space"
   type        = list(string)
   default     = ["172.20.1.0/24"]
+}
+
+variable "nextcloud_admin_username" {
+  description = "NextCloud Admin Username for the UI"
+  type        = string
+  default     = "ncadmin"
 }
