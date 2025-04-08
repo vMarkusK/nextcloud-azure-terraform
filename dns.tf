@@ -1,5 +1,5 @@
-resource "azurerm_private_dns_zone" "blob_storage" {
-  name                = "privatelink.blob.core.windows.net"
+resource "azurerm_private_dns_zone" "redis" {
+  name                = "privatelink.redis.cache.windows.net"
   resource_group_name = azurerm_resource_group.nextcloud.name
 }
 
@@ -8,10 +8,10 @@ resource "azurerm_private_dns_zone" "file_storage" {
   resource_group_name = azurerm_resource_group.nextcloud.name
 }
 
-resource "azurerm_private_dns_zone_virtual_network_link" "blob_storage" {
-  name                  = "pe_blob_storage"
+resource "azurerm_private_dns_zone_virtual_network_link" "redis" {
+  name                  = "pe_redis"
   resource_group_name   = azurerm_resource_group.nextcloud.name
-  private_dns_zone_name = azurerm_private_dns_zone.blob_storage.name
+  private_dns_zone_name = azurerm_private_dns_zone.redis.name
   virtual_network_id    = azurerm_virtual_network.nextcloud.id
 }
 
