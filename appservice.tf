@@ -52,6 +52,10 @@ resource "azurerm_linux_web_app" "nextcloud" {
     NEXTCLOUD_ADMIN_PASSWORD            = random_password.nextcloud_admin_password.result
     REDIS_HOST                          = azurerm_redis_cache.nextcloud.hostname
     REDIS_HOST_PASSWORD                 = azurerm_redis_cache.nextcloud.primary_access_key
-    REDIS_HOST_PORT                     = azurerm_redis_cache.nextcloud.port
+    REDIS_HOST_PORT                     = azurerm_redis_cache.nextcloud.ssl_port
+    MYSQL_DATABASE                      = azurerm_mysql_flexible_database.nextcloud.name
+    MYSQL_USER                          = var.mysql_admin_username
+    MYSQL_PASSWORD                      = random_password.mysql_admin_password.result
+    MYSQL_HOST                          = azurerm_mysql_flexible_server.nextcloud.fqdn
   }
 }

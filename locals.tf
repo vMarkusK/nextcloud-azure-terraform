@@ -11,4 +11,6 @@ locals {
   app_name      = format("%s-%s-%s", var.app_prefix, var.app_name, random_string.suffix.result)
   redis_name    = format("%s-%s-%s", var.redis_prefix, var.app_name, random_string.suffix.result)
   redis_pe_name = format("%s-%s", var.pe_prefix, local.redis_name)
+  mysql_name    = format("%s-%s-%s", var.mysql_prefix, var.app_name, random_string.suffix.result)
+  mysql_pe_name = format("%s-%s", var.pe_prefix, local.mysql_name)
 }

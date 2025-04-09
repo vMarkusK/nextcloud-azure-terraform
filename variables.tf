@@ -71,9 +71,15 @@ variable "app_prefix" {
 }
 
 variable "redis_prefix" {
-  description = "The AzureRedis Cache prefix"
+  description = "The Azure Redis Cache prefix"
   type        = string
   default     = "redis"
+}
+
+variable "mysql_prefix" {
+  description = "The Azure MySQL prefix"
+  type        = string
+  default     = "mysql"
 }
 
 variable "vnet_addressspace" {
@@ -86,4 +92,10 @@ variable "nextcloud_admin_username" {
   description = "NextCloud Admin Username for the UI"
   type        = string
   default     = "ncadmin"
+}
+
+variable "mysql_admin_username" {
+  description = "mysql Admin Username"
+  type        = string
+  default     = "ncdbadmin"
 }

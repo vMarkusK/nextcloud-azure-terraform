@@ -9,3 +9,15 @@ resource "azurerm_key_vault_secret" "nextcloud_admin_password" {
   key_vault_id = azurerm_key_vault.nextcloud.id
   content_type = "password"
 }
+
+resource "random_password" "mysql_admin_password" {
+  length  = 20
+  special = true
+}
+
+resource "azurerm_key_vault_secret" "mysql_admin_password" {
+  name         = "ncdbadminpassword"
+  value        = random_password.mysql_admin_password.result
+  key_vault_id = azurerm_key_vault.nextcloud.id
+  content_type = "password"
+}
