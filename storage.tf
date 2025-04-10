@@ -45,7 +45,7 @@ resource "azurerm_storage_account" "nextcloud" {
     }
   }
 
-  depends_on = [azurerm_key_vault.nextcloud, azurerm_role_assignment.nextcloud]
+  depends_on = [azurerm_key_vault.nextcloud, azurerm_role_assignment.nextcloud, azurerm_role_assignment.nextcloud_extendet]
 
 }
 

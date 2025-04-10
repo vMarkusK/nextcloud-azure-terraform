@@ -3,6 +3,7 @@ resource "azurerm_mysql_flexible_server" "nextcloud" {
   resource_group_name = azurerm_resource_group.nextcloud.name
   location            = azurerm_resource_group.nextcloud.location
   sku_name            = "B_Standard_B1ms"
+  version             = "8.0.21"
 
   administrator_login    = var.mysql_admin_username
   administrator_password = random_password.mysql_admin_password.result
@@ -10,21 +11,34 @@ resource "azurerm_mysql_flexible_server" "nextcloud" {
   public_network_access = "Disabled"
   backup_retention_days = 7
 
-  #high_availability {
-  #  mode = "ZoneRedundant"
-  #}
+  # high_availability {
+  #   mode = "ZoneRedundant"
+  # }
 
   identity {
     identity_ids = [azurerm_user_assigned_identity.nextcloud.id]
     type         = "UserAssigned"
   }
 
-  customer_managed_key {
-    key_vault_key_id                  = azurerm_key_vault_key.nextcloud.id
-    primary_user_assigned_identity_id = azurerm_user_assigned_identity.nextcloud.id
-  }
+  # storage {
+  #   size_gb           = 50
+  #   auto_grow_enabled = true
+  #   iops              = 360
+  # }
 
-  depends_on = [azurerm_key_vault.nextcloud, azurerm_role_assignment.nextcloud]
+  # customer_managed_key {
+  #   key_vault_key_id                  = azurerm_key_vault_key.nextcloud.id
+  #   primary_user_assigned_identity_id = azurerm_user_assigned_identity.nextcloud.id
+  # }
+
+  depends_on = [azurerm_key_vault.nextcloud, azurerm_role_assignment.nextcloud, azurerm_role_assignment.nextcloud_extendet]
+}
+
+resource "azurerm_mysql_flexible_server_configuration" "nextcloud_mysql_ssl" {
+  name                = "require_secure_transport"
+  resource_group_name = azurerm_resource_group.nextcloud.name
+  server_name         = azurerm_mysql_flexible_server.nextcloud.name
+  value               = "OFF"
 }
 
 resource "azurerm_private_endpoint" "nextcloud_mysql" {

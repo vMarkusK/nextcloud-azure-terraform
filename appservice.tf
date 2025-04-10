@@ -29,6 +29,18 @@ resource "azurerm_linux_web_app" "nextcloud" {
     type         = "AzureFiles"
   }
 
+  logs {
+    detailed_error_messages = false
+    failed_request_tracing  = false
+
+    http_logs {
+      file_system {
+        retention_in_days = 7
+        retention_in_mb   = 35
+      }
+    }
+  }
+
   site_config {
     always_on                               = true
     container_registry_use_managed_identity = false
@@ -48,6 +60,7 @@ resource "azurerm_linux_web_app" "nextcloud" {
 
   app_settings = {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = true
+    WEBSITES_CONTAINER_START_TIME_LIMIT = 1800
     NEXTCLOUD_ADMIN_USER                = var.nextcloud_admin_username
     NEXTCLOUD_ADMIN_PASSWORD            = random_password.nextcloud_admin_password.result
     REDIS_HOST                          = azurerm_redis_cache.nextcloud.hostname
@@ -57,5 +70,6 @@ resource "azurerm_linux_web_app" "nextcloud" {
     MYSQL_USER                          = var.mysql_admin_username
     MYSQL_PASSWORD                      = random_password.mysql_admin_password.result
     MYSQL_HOST                          = azurerm_mysql_flexible_server.nextcloud.fqdn
+    #SQLITE_DATABASE = "nextcloud"
   }
 }

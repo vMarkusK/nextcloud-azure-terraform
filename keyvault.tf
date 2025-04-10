@@ -24,6 +24,13 @@ resource "azurerm_role_assignment" "nextcloud" {
   principal_id         = azurerm_user_assigned_identity.nextcloud.principal_id
 }
 
+resource "azurerm_role_assignment" "nextcloud_extendet" {
+  scope                = azurerm_key_vault.nextcloud.id
+  role_definition_name = "Key Vault Crypto Service Encryption User"
+  principal_id         = azurerm_user_assigned_identity.nextcloud.principal_id
+}
+
+
 resource "azurerm_key_vault_key" "nextcloud" {
   name         = local.key_name
   key_vault_id = azurerm_key_vault.nextcloud.id
